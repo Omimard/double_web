@@ -1,5 +1,5 @@
 locals {
-  counter                       = 0
+  counter                       = 2
 
   group_name                    = "webservers"
   location                      = "uksouth"
