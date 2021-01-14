@@ -6,7 +6,7 @@ locals {
   name                          = "slave"
   size                          = "Standard_B1s"
   admin_username                = "azureuser"
-  ssh_file_location             = "~/.ssh/id_rsa.pub"
+  ssh_file_location             = "../id_rsa.pub"
   caching                       = "ReadWrite"
   storage_account_type          = "Standard_LRS"
   publisher                     = "Canonical"
