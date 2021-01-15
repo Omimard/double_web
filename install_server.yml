@@ -2,7 +2,7 @@
   - name: Install Tomcat
     hosts: webservers
     become: yes
-    become_user: azureuser
+    become_user: root
     tasks:
       - name: Add EPEL repository
         yum:
@@ -33,8 +33,8 @@
 
       - name: Download Tomcat
         get_url:
-          url: "{{ tomcat_archive_url }}"
-          dest: "{{ tomcat_archive_dest }}"
+          url: "https://downloads.apache.org/tomcat/tomcat-8/v8.5.61/bin/apache-tomcat-8.5.61.tar.gz"
+          dest: "/tmp"
 
       - name: Create a tomcat directory
         file:
@@ -42,10 +42,11 @@
           state: directory
           owner: tomcat
           group: tomcat
+          mode: "1777"
 
       - name: Extract tomcat archive
         unarchive:
-          src: "{{ tomcat_archive_dest }}"
+          src: "/tmp/apache-tomcat-8.5.61.tar.gz"
           dest: /usr/share/tomcat
           owner: tomcat
           group: tomcat
@@ -55,9 +56,8 @@
 
       - name: Copy tomcat service file
         template:
-          src: templates/tomcat.service.j2
+          src: tomcat.service.j2
           dest: /etc/systemd/system/tomcat.service
-        when: ansible_service_mgr == "systemd"
 
       - name: Start and enable tomcat
         service:
@@ -65,12 +65,3 @@
           name: tomcat
           state: started
           enabled: yes
-        when: ansible_service_mgr == "systemd"
-
-      - name: Open tomcat port on the firewall
-        firewalld:
-          port: 8080/tcp
-          permanent: true
-          state: enabled
-          immediate: yes
-        when: ansible_service_mgr == "systemd"
