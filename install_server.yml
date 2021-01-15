@@ -59,6 +59,11 @@
           src: tomcat.service.j2
           dest: /etc/systemd/system/tomcat.service
 
+      - name: Get .war file for deploy
+        get_url:
+          url: "https://github.com/Omimard/double_web/raw/master/page.war"
+          dest: /usr/share/tomcat/webapps
+
       - name: Start and enable tomcat
         service:
           daemon_reload: yes
