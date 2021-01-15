@@ -9,9 +9,9 @@ locals {
   ssh_file_location             = "../id_rsa.pub"
   caching                       = "ReadWrite"
   storage_account_type          = "Standard_LRS"
-  publisher                     = "Canonical"
-  offer                         = "UbuntuServer"
-  sku                           = "18.04-LTS"
+  publisher                     = "OpenLogic"
+  offer                         = "CentOS"
+  sku                           = "7.5"
   version                       = "latest"
   network_name                  = "web-servers-network"
   address_space                 = ["10.0.0.0/16"]

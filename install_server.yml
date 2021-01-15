@@ -3,7 +3,7 @@
     hosts: webservers
     become: yes
     become_user: azureuser
-  - tasks:
+    tasks:
       - name: Add EPEL repository
         yum:
           name: epel-release
