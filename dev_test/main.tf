@@ -56,6 +56,9 @@ module "vm" {
 }
 
 resource "local_file" "hosts" {
+  depends_on = [
+    "module.public_ip"
+  ]
   content = templatefile("../templates/hosts",
     {
       webservers = module.public_ip.ip_address
