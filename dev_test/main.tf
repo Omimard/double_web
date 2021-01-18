@@ -55,3 +55,11 @@ module "vm" {
 
 }
 
+resource "local_file" "hosts" {
+  content = templatefile("../templates/hosts",
+    {
+      webservers = module.public_ip.ip_address
+    }
+  )
+  filename = "../hosts"
+}
