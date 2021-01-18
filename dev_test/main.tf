@@ -6,7 +6,7 @@ provider "azurerm" {
  // version = "~>2.0"
   subscription_id = "a4183087-8a6d-42fa-b1ff-a9c8be389d97"
   client_id       = "cdb82170-3618-49ad-8dfc-b8b7e89076b0"
-  client_secret   = var.client_secret
+  client_secret   = "ggJtHveZH_1Bv.1DP4HtTorLrDsshLGNLX"
   tenant_id       = "0b5a1912-9abf-4c86-8adc-e7bf9e181bd0"
 
   features {}
@@ -57,11 +57,12 @@ module "vm" {
 
 resource "local_file" "hosts" {
   depends_on = [
-    "module.public_ip"
+    module.public_ip
   ]
-  content = templatefile("../templates/hosts",
+  count = local.counter
+  content = templatefile("../templates/hosts.cfg",
     {
-      webservers = module.public_ip.ip_address
+      webservers = module.public_ip[count.index].ip_address
     }
   )
   filename = "../hosts"
