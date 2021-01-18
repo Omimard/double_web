@@ -65,5 +65,5 @@ resource "local_file" "hosts" {
       webservers = module.public_ip[count.index].ip_address
     }
   )
-  filename = "../hosts"
+  filename = "../template/hosts"
 }
