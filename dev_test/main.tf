@@ -61,7 +61,7 @@ resource "local_file" "hosts" {
   ]
   count = local.counter
   content = templatefile("../templates/hosts.tpl",
-    vars {
+    {
       webserver = [module.public_ip[count.index].ip_address]
     }
   )
