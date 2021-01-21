@@ -71,5 +71,6 @@ resource "local_file" "hosts" {
 }
 
 output "webserver" {
-  value = local_file.hosts.webserver
+  count = local.counter
+  value = [local_file.hosts[count.index].webserver]
 }
