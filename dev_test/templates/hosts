@@ -1,4 +1,0 @@
-[webservers]
-%{ for public_ip in webservers ~}
-${public_ip}
-%{ endfor ~}

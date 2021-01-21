@@ -62,7 +62,7 @@ resource "local_file" "hosts" {
   count = local.counter
   content = templatefile("../templates/hosts.cfg",
     {
-      webservers = module.public_ip[count.index].ip_address
+      webserver = module.public_ip[count.index].ip_address
     }
   )
   filename = "../templates/hosts"
