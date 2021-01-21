@@ -56,9 +56,7 @@ module "vm" {
 }
 
 resource "local_file" "hosts" {
-  depends_on = [
-    module.public_ip
-  ]
+  
   count = local.counter
   content = templatefile("../templates/hosts.tpl",
     {
@@ -66,4 +64,12 @@ resource "local_file" "hosts" {
     }
   )
   filename = "../templates/hosts"
+
+  depends_on = [
+    module.public_ip
+  ]
+}
+
+output "webserver" {
+  value = local_file.hosts.webserver
 }
